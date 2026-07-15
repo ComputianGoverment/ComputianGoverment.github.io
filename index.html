@@ -1,0 +1,1413 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Republic of Computia - Official Government Portal</title>
+    <style>
+        /* === 2009 GOVERNMENT WEBSITE STYLES === */
+        body {
+            margin: 0;
+            padding: 0;
+            font-family: Verdana, Geneva, Tahoma, sans-serif;
+            font-size: 12px;
+            color: #333;
+            background-color: #d8dfe7;
+            background-image: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" width="4" height="4"><rect width="4" height="4" fill="%23d8dfe7"/><rect width="1" height="1" fill="%23cdd5de"/></svg>');
+        }
+
+        a {
+            color: #003366;
+            text-decoration: underline;
+        }
+        a:hover {
+            color: #cc0000;
+        }
+        a:visited {
+            color: #551a8b;
+        }
+
+        /* Skip nav */
+        .skip-nav {
+            background: #003366;
+            color: #fff;
+            font-size: 10px;
+            text-align: right;
+            padding: 2px 10px;
+        }
+        .skip-nav a {
+            color: #aaccee;
+            font-size: 10px;
+            margin-left: 8px;
+        }
+
+        /* Top utility bar */
+        .utility-bar {
+            background: linear-gradient(to bottom, #003366 0%, #001a33 100%);
+            color: #ccc;
+            font-size: 10px;
+            padding: 4px 10px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            border-bottom: 2px solid #ffcc00;
+        }
+        .utility-bar a {
+            color: #aaccff;
+            font-size: 10px;
+            margin: 0 6px;
+        }
+        .utility-bar select {
+            font-size: 10px;
+            padding: 1px;
+        }
+
+        /* Header */
+        .header {
+            background: linear-gradient(to bottom, #0a3d6b 0%, #1a5a8a 30%, #0a3d6b 100%);
+            border-bottom: 3px solid #c8a415;
+            padding: 10px 20px;
+            display: flex;
+            align-items: center;
+            min-height: 100px;
+            position: relative;
+        }
+        .header-seal {
+            width: 90px;
+            height: 90px;
+            margin-right: 15px;
+            flex-shrink: 0;
+        }
+        .seal-svg {
+            width: 90px;
+            height: 90px;
+        }
+        .header-text {
+            flex: 1;
+        }
+        .header-text h1 {
+            color: #ffffff;
+            font-size: 22px;
+            font-family: Georgia, 'Times New Roman', Times, serif;
+            margin: 0;
+            text-shadow: 1px 1px 2px rgba(0,0,0,0.5);
+            letter-spacing: 1px;
+        }
+        .header-text h2 {
+            color: #ffdd44;
+            font-size: 13px;
+            font-family: Georgia, 'Times New Roman', Times, serif;
+            margin: 2px 0 0 0;
+            font-weight: normal;
+            font-style: italic;
+        }
+        .header-text p {
+            color: #aaccee;
+            font-size: 10px;
+            margin: 4px 0 0 0;
+        }
+        .header-search {
+            text-align: right;
+        }
+        .header-search input[type="text"] {
+            width: 160px;
+            padding: 3px 5px;
+            font-size: 11px;
+            border: 1px solid #888;
+        }
+        .header-search input[type="submit"] {
+            padding: 3px 10px;
+            font-size: 11px;
+            background: linear-gradient(to bottom, #f0f0f0, #cccccc);
+            border: 1px solid #888;
+            cursor: pointer;
+        }
+        .header-search label {
+            color: #ccc;
+            font-size: 10px;
+        }
+
+        /* Main Navigation */
+        .main-nav {
+            background: linear-gradient(to bottom, #1a5a8a 0%, #0e4a75 50%, #0a3d6b 100%);
+            border-bottom: 1px solid #003355;
+            padding: 0;
+            display: flex;
+            justify-content: center;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.3);
+        }
+        .main-nav a {
+            color: #ffffff;
+            text-decoration: none;
+            font-size: 11px;
+            font-weight: bold;
+            padding: 8px 14px;
+            display: block;
+            border-right: 1px solid rgba(255,255,255,0.15);
+            border-left: 1px solid rgba(0,0,0,0.2);
+            transition: background 0.1s;
+        }
+        .main-nav a:first-child {
+            border-left: none;
+        }
+        .main-nav a:last-child {
+            border-right: none;
+        }
+        .main-nav a:hover, .main-nav a.active {
+            background: linear-gradient(to bottom, #ffcc00, #cc9900);
+            color: #003366;
+        }
+
+        /* Marquee / Ticker */
+        .ticker-bar {
+            background: #fff4cc;
+            border-bottom: 1px solid #e0c040;
+            border-top: 1px solid #e0c040;
+            padding: 4px 10px;
+            font-size: 11px;
+            color: #663300;
+            overflow: hidden;
+        }
+        .ticker-bar strong {
+            color: #cc0000;
+        }
+        .ticker-content {
+            display: inline-block;
+            white-space: nowrap;
+            animation: ticker 25s linear infinite;
+        }
+        @keyframes ticker {
+            0% { transform: translateX(100%); }
+            100% { transform: translateX(-100%); }
+        }
+
+        /* Breadcrumb */
+        .breadcrumb {
+            background: #eef2f7;
+            border-bottom: 1px solid #ccc;
+            padding: 5px 20px;
+            font-size: 10px;
+            color: #666;
+        }
+
+        /* Content wrapper */
+        .content-wrapper {
+            max-width: 960px;
+            margin: 0 auto;
+            display: flex;
+            gap: 0;
+            padding: 10px 0;
+        }
+
+        /* Left Sidebar */
+        .sidebar-left {
+            width: 200px;
+            flex-shrink: 0;
+            padding-right: 10px;
+        }
+        .sidebar-box {
+            background: #ffffff;
+            border: 1px solid #99aabb;
+            margin-bottom: 10px;
+            box-shadow: 1px 1px 3px rgba(0,0,0,0.1);
+        }
+        .sidebar-box h3 {
+            background: linear-gradient(to bottom, #336699, #264d73);
+            color: #fff;
+            font-size: 11px;
+            padding: 6px 10px;
+            margin: 0;
+            font-family: Verdana, sans-serif;
+            border-bottom: 2px solid #ffcc00;
+        }
+        .sidebar-box ul {
+            list-style: none;
+            padding: 0;
+            margin: 0;
+        }
+        .sidebar-box ul li {
+            border-bottom: 1px solid #e5e5e5;
+        }
+        .sidebar-box ul li a {
+            display: block;
+            padding: 5px 10px;
+            font-size: 11px;
+            color: #003366;
+            text-decoration: none;
+            background: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" width="6" height="6" viewBox="0 0 6 6"><polygon points="0,0 6,3 0,6" fill="%23336699"/></svg>') no-repeat 6px center;
+            padding-left: 18px;
+        }
+        .sidebar-box ul li a:hover {
+            background-color: #eef4ff;
+            color: #cc0000;
+            background-image: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" width="6" height="6" viewBox="0 0 6 6"><polygon points="0,0 6,3 0,6" fill="%23cc0000"/></svg>');
+        }
+        .sidebar-box .box-content {
+            padding: 8px 10px;
+            font-size: 11px;
+            line-height: 1.5;
+        }
+
+        /* Quick Links box */
+        .quick-links-box {
+            background: #fffff0;
+            border: 1px solid #cccc99;
+        }
+        .quick-links-box h3 {
+            background: linear-gradient(to bottom, #998833, #776622);
+        }
+
+        /* Main Content */
+        .main-content {
+            flex: 1;
+            min-width: 0;
+        }
+
+        /* Featured / Hero area */
+        .featured-area {
+            background: #ffffff;
+            border: 1px solid #99aabb;
+            margin-bottom: 10px;
+            box-shadow: 1px 1px 3px rgba(0,0,0,0.1);
+            overflow: hidden;
+        }
+        .featured-header {
+            background: linear-gradient(to bottom, #336699, #264d73);
+            color: #fff;
+            font-size: 13px;
+            font-weight: bold;
+            padding: 6px 12px;
+            border-bottom: 2px solid #ffcc00;
+            font-family: Georgia, serif;
+        }
+        .featured-body {
+            padding: 12px;
+            display: flex;
+            gap: 12px;
+        }
+        .featured-image {
+            width: 220px;
+            height: 150px;
+            background: linear-gradient(135deg, #1a5a8a, #2a7ab5, #1a5a8a);
+            border: 2px solid #99aabb;
+            flex-shrink: 0;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-size: 10px;
+            position: relative;
+            overflow: hidden;
+        }
+        .featured-image .flag-display {
+            font-size: 50px;
+            line-height: 1;
+        }
+        .featured-image .caption {
+            background: rgba(0,0,0,0.6);
+            width: 100%;
+            text-align: center;
+            padding: 3px 0;
+            position: absolute;
+            bottom: 0;
+            font-size: 9px;
+        }
+        .featured-text h3 {
+            margin: 0 0 6px 0;
+            font-size: 14px;
+            font-family: Georgia, serif;
+            color: #003366;
+        }
+        .featured-text p {
+            font-size: 11px;
+            line-height: 1.6;
+            margin: 0 0 8px 0;
+            color: #333;
+        }
+        .featured-text .read-more {
+            font-size: 11px;
+            font-weight: bold;
+        }
+
+        /* News section */
+        .news-section {
+            background: #ffffff;
+            border: 1px solid #99aabb;
+            margin-bottom: 10px;
+            box-shadow: 1px 1px 3px rgba(0,0,0,0.1);
+        }
+        .news-section h3 {
+            background: linear-gradient(to bottom, #336699, #264d73);
+            color: #fff;
+            font-size: 12px;
+            padding: 6px 12px;
+            margin: 0;
+            border-bottom: 2px solid #ffcc00;
+            font-family: Georgia, serif;
+        }
+        .news-item {
+            padding: 8px 12px;
+            border-bottom: 1px solid #e5e5e5;
+        }
+        .news-item:last-child {
+            border-bottom: none;
+        }
+        .news-date {
+            color: #888;
+            font-size: 10px;
+            font-style: italic;
+        }
+        .news-item h4 {
+            margin: 2px 0;
+            font-size: 12px;
+        }
+        .news-item h4 a {
+            color: #003366;
+        }
+        .news-item p {
+            margin: 3px 0 0 0;
+            font-size: 11px;
+            color: #555;
+            line-height: 1.5;
+        }
+        .news-icon {
+            color: #cc0000;
+            font-weight: bold;
+            font-size: 10px;
+            margin-right: 3px;
+        }
+
+        /* Two column boxes */
+        .two-col {
+            display: flex;
+            gap: 10px;
+            margin-bottom: 10px;
+        }
+        .two-col .col {
+            flex: 1;
+            background: #ffffff;
+            border: 1px solid #99aabb;
+            box-shadow: 1px 1px 3px rgba(0,0,0,0.1);
+        }
+        .two-col .col h3 {
+            background: linear-gradient(to bottom, #336699, #264d73);
+            color: #fff;
+            font-size: 11px;
+            padding: 6px 10px;
+            margin: 0;
+            border-bottom: 2px solid #ffcc00;
+        }
+        .two-col .col .col-content {
+            padding: 10px;
+            font-size: 11px;
+            line-height: 1.6;
+        }
+        .two-col .col ul {
+            padding-left: 18px;
+            margin: 5px 0;
+        }
+        .two-col .col ul li {
+            margin-bottom: 4px;
+            font-size: 11px;
+        }
+
+        /* Right Sidebar */
+        .sidebar-right {
+            width: 180px;
+            flex-shrink: 0;
+            padding-left: 10px;
+        }
+
+        /* Alert box */
+        .alert-box {
+            background: #fff3f3;
+            border: 2px solid #cc0000;
+            margin-bottom: 10px;
+        }
+        .alert-box h3 {
+            background: linear-gradient(to bottom, #cc0000, #990000) !important;
+            border-bottom-color: #ffcc00 !important;
+        }
+        .alert-box .box-content {
+            font-size: 10px;
+            color: #660000;
+        }
+        .alert-box .blink-text {
+            animation: blink 1s step-start infinite;
+            color: #cc0000;
+            font-weight: bold;
+        }
+        @keyframes blink {
+            50% { opacity: 0; }
+        }
+
+        /* Poll box */
+        .poll-box .box-content label {
+            display: block;
+            margin: 3px 0;
+            font-size: 11px;
+        }
+        .poll-box .box-content input[type="radio"] {
+            margin-right: 5px;
+        }
+        .poll-box .vote-btn {
+            margin-top: 6px;
+            padding: 3px 12px;
+            font-size: 10px;
+            background: linear-gradient(to bottom, #f0f0f0, #cccccc);
+            border: 1px solid #888;
+            cursor: pointer;
+        }
+
+        /* Visitor counter */
+        .visitor-counter {
+            background: #000;
+            color: #00ff00;
+            font-family: 'Courier New', monospace;
+            font-size: 13px;
+            text-align: center;
+            padding: 8px;
+            border: 2px inset #444;
+            margin-bottom: 10px;
+            letter-spacing: 2px;
+        }
+        .visitor-counter span {
+            color: #aaa;
+            font-size: 9px;
+            display: block;
+            letter-spacing: 0;
+        }
+
+        /* Calendar widget */
+        .calendar-mini {
+            width: 100%;
+            border-collapse: collapse;
+            font-size: 9px;
+        }
+        .calendar-mini th {
+            background: #336699;
+            color: white;
+            padding: 2px;
+            text-align: center;
+        }
+        .calendar-mini td {
+            text-align: center;
+            padding: 2px;
+            border: 1px solid #ddd;
+        }
+        .calendar-mini td.today {
+            background: #ffcc00;
+            font-weight: bold;
+        }
+        .calendar-mini td:hover {
+            background: #eef4ff;
+        }
+
+        /* Services grid */
+        .services-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 8px;
+            padding: 10px;
+        }
+        .service-item {
+            text-align: center;
+            padding: 10px 5px;
+            border: 1px solid #ddd;
+            background: linear-gradient(to bottom, #f8f8f8, #eeeeee);
+            cursor: pointer;
+            font-size: 10px;
+            text-decoration: none;
+            color: #003366;
+        }
+        .service-item:hover {
+            background: linear-gradient(to bottom, #eef4ff, #dde8f4);
+            border-color: #88aacc;
+        }
+        .service-icon {
+            font-size: 24px;
+            display: block;
+            margin-bottom: 4px;
+        }
+
+        /* Footer */
+        .footer-top {
+            background: linear-gradient(to bottom, #0a3d6b, #062d4f);
+            border-top: 3px solid #c8a415;
+            color: #aabbcc;
+            padding: 15px 20px;
+            font-size: 10px;
+        }
+        .footer-columns {
+            max-width: 960px;
+            margin: 0 auto;
+            display: flex;
+            gap: 30px;
+        }
+        .footer-col {
+            flex: 1;
+        }
+        .footer-col h4 {
+            color: #ffcc00;
+            font-size: 11px;
+            margin: 0 0 8px 0;
+            border-bottom: 1px solid #335577;
+            padding-bottom: 4px;
+        }
+        .footer-col ul {
+            list-style: none;
+            padding: 0;
+            margin: 0;
+        }
+        .footer-col ul li {
+            margin-bottom: 3px;
+        }
+        .footer-col ul li a {
+            color: #88aacc;
+            text-decoration: none;
+            font-size: 10px;
+        }
+        .footer-col ul li a:hover {
+            color: #ffcc00;
+        }
+
+        .footer-bottom {
+            background: #001a33;
+            color: #667788;
+            text-align: center;
+            padding: 10px;
+            font-size: 9px;
+            border-top: 1px solid #0a3d6b;
+        }
+        .footer-bottom a {
+            color: #8899aa;
+        }
+        .ie-notice {
+            font-size: 9px;
+            color: #556677;
+            margin-top: 5px;
+        }
+        .ie-notice img {
+            vertical-align: middle;
+        }
+
+        /* W3C badges */
+        .badges {
+            margin-top: 8px;
+        }
+        .badge {
+            display: inline-block;
+            background: #335577;
+            color: #aabbcc;
+            font-size: 8px;
+            padding: 2px 6px;
+            border: 1px solid #446688;
+            margin: 2px;
+        }
+
+        /* Separator lines */
+        hr.section-line {
+            border: none;
+            border-top: 1px solid #99aabb;
+            margin: 8px 0;
+        }
+
+        /* "New" and "Updated" badges */
+        .badge-new {
+            background: #cc0000;
+            color: white;
+            font-size: 9px;
+            padding: 1px 4px;
+            font-weight: bold;
+            animation: blink 1.5s step-start infinite;
+        }
+        .badge-updated {
+            background: #ff8800;
+            color: white;
+            font-size: 9px;
+            padding: 1px 4px;
+            font-weight: bold;
+        }
+
+        /* Weather widget */
+        .weather-widget {
+            text-align: center;
+            padding: 5px;
+        }
+        .weather-icon {
+            font-size: 28px;
+        }
+        .weather-temp {
+            font-size: 16px;
+            font-weight: bold;
+            color: #003366;
+        }
+
+        /* Table styling */
+        .data-table {
+            width: 100%;
+            border-collapse: collapse;
+            font-size: 10px;
+            margin-top: 5px;
+        }
+        .data-table th {
+            background: #336699;
+            color: white;
+            padding: 4px 8px;
+            text-align: left;
+            font-size: 10px;
+        }
+        .data-table td {
+            padding: 4px 8px;
+            border-bottom: 1px solid #ddd;
+        }
+        .data-table tr:nth-child(even) {
+            background: #f0f4f8;
+        }
+        .data-table tr:hover {
+            background: #e0e8f0;
+        }
+
+        /* Ministers section */
+        .minister-card {
+            display: flex;
+            gap: 8px;
+            padding: 8px 10px;
+            border-bottom: 1px solid #e5e5e5;
+        }
+        .minister-photo {
+            width: 45px;
+            height: 55px;
+            background: linear-gradient(135deg, #ccc, #999);
+            border: 1px solid #888;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 20px;
+            flex-shrink: 0;
+        }
+        .minister-info {
+            font-size: 10px;
+        }
+        .minister-info strong {
+            font-size: 11px;
+            color: #003366;
+            display: block;
+        }
+        .minister-info em {
+            color: #666;
+            font-size: 10px;
+        }
+
+        /* Scrollable box */
+        .scroll-box {
+            max-height: 130px;
+            overflow-y: scroll;
+            padding: 6px 10px;
+            font-size: 10px;
+            line-height: 1.6;
+        }
+
+        /* Print/email links */
+        .page-tools {
+            text-align: right;
+            font-size: 10px;
+            padding: 3px 12px;
+            background: #f5f5f5;
+            border-bottom: 1px solid #e5e5e5;
+        }
+        .page-tools a {
+            margin-left: 10px;
+            color: #666;
+            font-size: 10px;
+        }
+
+        /* Last updated */
+        .last-updated {
+            font-size: 9px;
+            color: #999;
+            text-align: right;
+            padding: 4px 12px;
+            font-style: italic;
+        }
+
+        .flag-stripe {
+            height: 4px;
+            background: linear-gradient(to right, 
+                #003399 0%, #003399 33%, 
+                #ffffff 33%, #ffffff 50%, 
+                #ffcc00 50%, #ffcc00 67%, 
+                #009933 67%, #009933 100%
+            );
+        }
+
+        /* Emergency banner */
+        .emergency-banner {
+            background: linear-gradient(to right, #cc0000, #990000, #cc0000);
+            color: white;
+            text-align: center;
+            padding: 4px;
+            font-size: 11px;
+            font-weight: bold;
+            letter-spacing: 1px;
+        }
+    </style>
+</head>
+<body>
+
+    <!-- Flag stripe -->
+    <div class="flag-stripe"></div>
+
+    <!-- Skip Navigation -->
+    <div class="skip-nav">
+        <a href="#main">Skip to Main Content</a> |
+        <a href="#nav">Skip to Navigation</a> |
+        <a href="https://en.wikipedia.org/wiki/Web_accessibility" target="_blank">Accessibility Statement</a>
+    </div>
+
+    <!-- Utility Bar -->
+    <div class="utility-bar">
+        <div>
+            <a href="index.html">Home</a> |
+            <a href="sitemap.html">Site Map</a> |
+            <a href="/cdn-cgi/l/email-protection#a0c9cec6cfe0c7cfd68ec3d0">Contact Us</a> |
+            <a href="faqs.html">FAQs</a> |
+            <a href="rti.html">RTI Portal</a>
+        </div>
+        <div>
+            <label for="lang">Language: </label>
+            <select id="lang">
+                <option>English</option>
+                <option>Computian</option>
+                <option>Français</option>
+                <option>Español</option>
+            </select>
+            &nbsp;
+            <label for="fontsize">Text Size: </label>
+            <a href="#" style="font-size:9px; color:#aaccff;">A</a>
+            <a href="#" style="font-size:12px; color:#aaccff;">A</a>
+            <a href="#" style="font-size:15px; color:#aaccff;">A</a>
+            &nbsp; | &nbsp;
+            📅 Tuesday, March 17, 2009
+        </div>
+    </div>
+
+    <!-- Header -->
+    <div class="header">
+        <div class="header-seal">
+            <svg class="seal-svg" viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg">
+                <!-- Outer ring -->
+                <circle cx="50" cy="50" r="48" fill="none" stroke="#c8a415" stroke-width="3"/>
+                <circle cx="50" cy="50" r="44" fill="none" stroke="#c8a415" stroke-width="1"/>
+                <circle cx="50" cy="50" r="42" fill="#0a3d6b"/>
+                <!-- Gear/cog teeth -->
+                <g fill="#c8a415">
+                    <rect x="47" y="2" width="6" height="10" rx="1" transform="rotate(0 50 50)"/>
+                    <rect x="47" y="2" width="6" height="10" rx="1" transform="rotate(30 50 50)"/>
+                    <rect x="47" y="2" width="6" height="10" rx="1" transform="rotate(60 50 50)"/>
+                    <rect x="47" y="2" width="6" height="10" rx="1" transform="rotate(90 50 50)"/>
+                    <rect x="47" y="2" width="6" height="10" rx="1" transform="rotate(120 50 50)"/>
+                    <rect x="47" y="2" width="6" height="10" rx="1" transform="rotate(150 50 50)"/>
+                    <rect x="47" y="2" width="6" height="10" rx="1" transform="rotate(180 50 50)"/>
+                    <rect x="47" y="2" width="6" height="10" rx="1" transform="rotate(210 50 50)"/>
+                    <rect x="47" y="2" width="6" height="10" rx="1" transform="rotate(240 50 50)"/>
+                    <rect x="47" y="2" width="6" height="10" rx="1" transform="rotate(270 50 50)"/>
+                    <rect x="47" y="2" width="6" height="10" rx="1" transform="rotate(300 50 50)"/>
+                    <rect x="47" y="2" width="6" height="10" rx="1" transform="rotate(330 50 50)"/>
+                </g>
+                <!-- Inner circle -->
+                <circle cx="50" cy="50" r="35" fill="#0e4a75" stroke="#c8a415" stroke-width="1.5"/>
+                <!-- Monitor/Computer icon -->
+                <rect x="33" y="30" width="34" height="24" rx="2" fill="#c8a415" stroke="#ffffff" stroke-width="1"/>
+                <rect x="36" y="33" width="28" height="17" rx="1" fill="#003366"/>
+                <!-- Screen content - binary -->
+                <text x="38" y="41" fill="#00ff00" font-size="5" font-family="monospace">01101</text>
+                <text x="38" y="47" fill="#00ff00" font-size="5" font-family="monospace">10010</text>
+                <!-- Monitor stand -->
+                <rect x="45" y="54" width="10" height="4" fill="#c8a415"/>
+                <rect x="42" y="57" width="16" height="3" rx="1" fill="#c8a415"/>
+                <!-- Stars -->
+                <text x="25" y="28" fill="#c8a415" font-size="7">★</text>
+                <text x="68" y="28" fill="#c8a415" font-size="7">★</text>
+                <text x="25" y="70" fill="#c8a415" font-size="7">★</text>
+                <text x="68" y="70" fill="#c8a415" font-size="7">★</text>
+                <!-- Text around the seal -->
+                <defs>
+                    <path id="topArc" d="M 15,50 A 35,35 0 0,1 85,50"/>
+                    <path id="bottomArc" d="M 85,55 A 35,35 0 0,1 15,55"/>
+                </defs>
+                <text font-size="6.5" fill="#c8a415" font-weight="bold" font-family="serif">
+                    <textPath href="#topArc" startOffset="50%" text-anchor="middle">REPUBLIC OF COMPUTIA</textPath>
+                </text>
+                <text font-size="5.5" fill="#c8a415" font-family="serif">
+                    <textPath href="#bottomArc" startOffset="50%" text-anchor="middle">EST. 1947 ★ PROGRESS ★ UNITY</textPath>
+                </text>
+            </svg>
+        </div>
+        <div class="header-text">
+            <h1>REPUBLIC OF COMPUTIA</h1>
+            <h2>"Through Logic, We Prosper"</h2>
+            <p>Official Government Portal — Gateway to Citizen Services and Information</p>
+        </div>
+        <div class="header-search">
+            <form action="search.html" method="get">
+                <label for="search">Search Gov.cp</label><br>
+                <input type="text" id="search" name="q" placeholder="Search...">
+                <input type="submit" value="Go">
+                <br>
+                <a href="search.html" style="color:#88aacc; font-size:9px;">Advanced Search</a>
+            </form>
+        </div>
+    </div>
+
+    <!-- Main Navigation -->
+    <nav class="main-nav" id="nav">
+        <a href="index.html" class="active">🏠 Home</a>
+        <a href="government.html">Government</a>
+        <a href="ministries.html">Ministries</a>
+        <a href="citizens.html">Citizens</a>
+        <a href="business.html">Business</a>
+        <a href="tourism.html">Tourism</a>
+        <a href="documents.html">Documents</a>
+        <a href="legislation.html">Legislation</a>
+        <a href="eservices.html">E-Services</a>
+        <a href="about.html">About Computia</a>
+    </nav>
+
+    <!-- Ticker -->
+    <div class="ticker-bar">
+        <div class="ticker-content">
+            <strong>📢 ANNOUNCEMENT:</strong> Tax filing deadline extended to April 30, 2009 — 
+            <strong>NEW:</strong> National Digital Infrastructure Plan 2009 now available for public comment — 
+            <strong>NOTICE:</strong> Embassy of Computia in Washington D.C. relocated to new address effective March 20 — 
+            <strong>ALERT:</strong> Scheduled maintenance of e-Gov portal on March 22, 2009 from 02:00-06:00 CST — 
+            <strong>UPDATE:</strong> Census 2009 registration begins April 1st — Visit census.gov.cp for details
+        </div>
+    </div>
+
+    <!-- Breadcrumb -->
+    <div class="breadcrumb">
+        📁 <a href="index.html">Home</a> &raquo; Welcome to the Official Portal of the Republic of Computia
+    </div>
+
+    <!-- Content Wrapper -->
+    <div class="content-wrapper" id="main">
+
+        <!-- Left Sidebar -->
+        <aside class="sidebar-left">
+
+            <div class="sidebar-box">
+                <h3>🏛️ Government</h3>
+                <ul>
+                    <li><a href="government/president.html">Office of the President</a></li>
+                    <li><a href="government/primeminister.html">Prime Minister's Office</a></li>
+                    <li><a href="government/parliament.html">The Parliament</a></li>
+                    <li><a href="government/supremecourt.html">Supreme Court</a></li>
+                    <li><a href="government/cabinet.html">Cabinet Members</a></li>
+                    <li><a href="government/states.html">State Governors</a></li>
+                    <li><a href="government/electoral.html">Electoral Commission</a></li>
+                    <li><a href="government/constitution.html">Constitution</a></li>
+                </ul>
+            </div>
+
+            <div class="sidebar-box">
+                <h3>📋 Ministries</h3>
+                <ul>
+                    <li><a href="ministries/technology.html">Ministry of Technology</a></li>
+                    <li><a href="ministries/finance.html">Ministry of Finance</a></li>
+                    <li><a href="ministries/defence.html">Ministry of Defence</a></li>
+                    <li><a href="ministries/education.html">Ministry of Education</a></li>
+                    <li><a href="ministries/health.html">Ministry of Health</a></li>
+                    <li><a href="ministries/transport.html">Ministry of Transport</a></li>
+                    <li><a href="ministries/agriculture.html">Ministry of Agriculture</a></li>
+                    <li><a href="ministries/commerce.html">Ministry of Commerce</a></li>
+                    <li><a href="ministries/foreignaffairs.html">Ministry of Foreign Affairs</a></li>
+                    <li><a href="ministries/internalaffairs.html">Ministry of Internal Affairs</a></li>
+                    <li><a href="ministries.html">View All Ministries &raquo;</a></li>
+                </ul>
+            </div>
+
+            <div class="sidebar-box quick-links-box">
+                <h3>⚡ Quick Links</h3>
+                <ul>
+                    <li><a href="eservices/passport.html">Apply for Passport</a></li>
+                    <li><a href="eservices/tax.html">Tax Filing Portal</a></li>
+                    <li><a href="citizens/vitals.html">Birth/Death Certificates</a></li>
+                    <li><a href="eservices/businessreg.html">Business Registration</a></li>
+                    <li><a href="eservices/drivinglicence.html">Driving Licence</a></li>
+                    <li><a href="sitemap.html">Public Tenders</a></li>
+                    <li><a href="sitemap.html">Government Jobs <span class="badge-new">NEW</span></a></li>
+                    <li><a href="citizens/nationalid.html">National ID Card</a></li>
+                </ul>
+            </div>
+
+            <div class="sidebar-box">
+                <h3>🌤️ Weather — Byteburg</h3>
+                <div class="weather-widget">
+                    <div class="weather-icon">⛅</div>
+                    <div class="weather-temp">22°C</div>
+                    <div style="font-size:10px; color:#666;">Partly Cloudy</div>
+                    <div style="font-size:9px; color:#999; margin-top:4px;">
+                        H: 26°C | L: 18°C<br>
+                        Humidity: 65%
+                    </div>
+                </div>
+            </div>
+
+            <div class="sidebar-box">
+                <h3>📅 March 2009</h3>
+                <div style="padding:5px;">
+                    <table class="calendar-mini">
+                        <tr>
+                            <th>Su</th><th>Mo</th><th>Tu</th><th>We</th><th>Th</th><th>Fr</th><th>Sa</th>
+                        </tr>
+                        <tr><td>1</td><td>2</td><td>3</td><td>4</td><td>5</td><td>6</td><td>7</td></tr>
+                        <tr><td>8</td><td>9</td><td>10</td><td>11</td><td>12</td><td>13</td><td>14</td></tr>
+                        <tr><td>15</td><td>16</td><td class="today">17</td><td>18</td><td>19</td><td>20</td><td>21</td></tr>
+                        <tr><td>22</td><td>23</td><td>24</td><td>25</td><td>26</td><td>27</td><td>28</td></tr>
+                        <tr><td>29</td><td>30</td><td>31</td><td></td><td></td><td></td><td></td></tr>
+                    </table>
+                </div>
+            </div>
+
+        </aside>
+
+        <!-- Main Content Area -->
+        <main class="main-content">
+
+            <!-- Featured Story -->
+            <div class="featured-area">
+                <div class="featured-header">
+                    ★ Featured: National Digital Advancement Program 2009
+                </div>
+                <div class="page-tools">
+                    <a href="javascript:window.print()">🖨️ Print</a>
+                    <a href="/cdn-cgi/l/email-protection#a39cd0d6c1c9c6c0d79ef1c6d3d6c1cfcac0869193ccc5869193e0ccced3d6d7cac2869193edc6d4d085c1ccc7da9ee0cbc6c0c8869193ccd6d7869193d7cbcad0869193d3c2c4c682">✉️ Email</a>
+                    <a href="https://en.wikipedia.org/wiki/PDF" target="_blank">📄 PDF Version</a>
+                    <a href="https://twitter.com/intent/tweet?text=Republic+of+Computia+Digital+Advancement+Program+2009" target="_blank">🔗 Share</a>
+                </div>
+                <div class="featured-body">
+                    <div class="featured-image">
+                        <svg viewBox="0 0 220 150" width="220" height="150" xmlns="http://www.w3.org/2000/svg">
+                            <defs>
+                                <linearGradient id="sky" x1="0%" y1="0%" x2="0%" y2="100%">
+                                    <stop offset="0%" style="stop-color:#1a5a8a"/>
+                                    <stop offset="100%" style="stop-color:#2a7ab5"/>
+                                </linearGradient>
+                            </defs>
+                            <rect width="220" height="150" fill="url(#sky)"/>
+                            <rect x="0" y="110" width="220" height="40" fill="#1a4a2a"/>
+                            <rect x="20" y="50" width="40" height="60" fill="#0e4a75" stroke="#c8a415" stroke-width="1"/>
+                            <rect x="25" y="55" width="8" height="8" fill="#aaddff" opacity="0.7"/>
+                            <rect x="37" y="55" width="8" height="8" fill="#aaddff" opacity="0.5"/>
+                            <rect x="25" y="67" width="8" height="8" fill="#aaddff" opacity="0.6"/>
+                            <rect x="37" y="67" width="8" height="8" fill="#aaddff" opacity="0.8"/>
+                            <rect x="25" y="79" width="8" height="8" fill="#aaddff" opacity="0.4"/>
+                            <rect x="37" y="79" width="8" height="8" fill="#aaddff" opacity="0.7"/>
+                            <rect x="25" y="91" width="8" height="8" fill="#aaddff" opacity="0.9"/>
+                            <rect x="37" y="91" width="8" height="8" fill="#aaddff" opacity="0.3"/>
+                            <rect x="75" y="60" width="50" height="50" fill="#0e4a75" stroke="#c8a415" stroke-width="1"/>
+                            <ellipse cx="100" cy="60" rx="25" ry="15" fill="#0e4a75" stroke="#c8a415" stroke-width="1"/>
+                            <rect x="80" y="65" width="10" height="12" fill="#aaddff" opacity="0.6"/>
+                            <rect x="95" y="65" width="10" height="12" fill="#aaddff" opacity="0.8"/>
+                            <rect x="110" y="65" width="10" height="12" fill="#aaddff" opacity="0.5"/>
+                            <rect x="80" y="82" width="10" height="12" fill="#aaddff" opacity="0.4"/>
+                            <rect x="95" y="82" width="10" height="12" fill="#aaddff" opacity="0.7"/>
+                            <rect x="110" y="82" width="10" height="12" fill="#aaddff" opacity="0.6"/>
+                            <line x1="100" y1="45" x2="100" y2="35" stroke="#c8a415" stroke-width="1.5"/>
+                            <path d="M 92,35 Q 100,28 108,35" fill="none" stroke="#c8a415" stroke-width="1.5"/>
+                            <rect x="155" y="30" width="15" height="80" fill="#0e4a75" stroke="#c8a415" stroke-width="1"/>
+                            <line x1="162" y1="30" x2="162" y2="22" stroke="#cc0000" stroke-width="2"/>
+                            <circle cx="162" cy="20" r="3" fill="#cc0000" opacity="0.8"/>
+                            <rect x="157" y="40" width="5" height="5" fill="#aaddff" opacity="0.6"/>
+                            <rect x="157" y="55" width="5" height="5" fill="#aaddff" opacity="0.8"/>
+                            <rect x="157" y="70" width="5" height="5" fill="#aaddff" opacity="0.5"/>
+                            <rect x="157" y="85" width="5" height="5" fill="#aaddff" opacity="0.7"/>
+                            <line x1="0" y1="120" x2="220" y2="120" stroke="#2a6a3a" stroke-width="0.5"/>
+                            <line x1="0" y1="130" x2="220" y2="130" stroke="#2a6a3a" stroke-width="0.5"/>
+                            <circle cx="180" cy="20" r="1" fill="white"/>
+                            <circle cx="195" cy="35" r="1" fill="white"/>
+                            <circle cx="10" cy="15" r="1" fill="white"/>
+                            <circle cx="50" cy="25" r="1" fill="white"/>
+                            <circle cx="140" cy="15" r="1" fill="white"/>
+                            <rect x="0" y="135" width="220" height="15" fill="rgba(0,0,0,0.6)"/>
+                            <text x="110" y="145" text-anchor="middle" fill="white" font-size="8" font-family="Verdana">Byteburg Skyline — Capital City</text>
+                        </svg>
+                    </div>
+                    <div class="featured-text">
+                        <h3>President Announces ₢2.4 Billion Digital Infrastructure Investment</h3>
+                        <p>
+                            President <strong>Dr. Alan K. Turing-Patel</strong> today announced the most ambitious 
+                            technology modernization program in Computia's history. The <em>National Digital 
+                            Advancement Program (NDAP) 2009</em> will bring high-speed internet connectivity to 
+                            all 12 provinces, establish new technology parks in Byteburg, Port Recursive, and 
+                            Silicon Delta, and modernize all government services through the new e-Gov 2.0 platform.
+                        </p>
+                        <p>
+                            "Computia was founded on the principles of innovation and progress. This program 
+                            ensures we remain at the forefront of the digital revolution," said President Turing-Patel 
+                            during the announcement at the National Assembly.
+                        </p>
+                        <a href="ministries/technology.html" class="read-more">Read Full Story &raquo;</a>
+                    </div>
+                </div>
+                <div class="last-updated">Last Updated: March 17, 2009 14:32 CST</div>
+            </div>
+
+            <!-- E-Services Grid -->
+            <div class="featured-area">
+                <div class="featured-header">💻 Online Citizen Services — e-Gov Portal</div>
+                <div class="services-grid">
+                    <a href="eservices/passport.html" class="service-item">
+                        <span class="service-icon">📘</span>
+                        Passport Services
+                    </a>
+                    <a href="eservices/tax.html" class="service-item">
+                        <span class="service-icon">💰</span>
+                        Pay Taxes Online
+                    </a>
+                    <a href="eservices/health.html" class="service-item">
+                        <span class="service-icon">🏥</span>
+                        Health Services
+                    </a>
+                    <a href="eservices/education.html" class="service-item">
+                        <span class="service-icon">🎓</span>
+                        Education Portal
+                    </a>
+                    <a href="eservices/property.html" class="service-item">
+                        <span class="service-icon">🏠</span>
+                        Property Records
+                    </a>
+                    <a href="eservices/court.html" class="service-item">
+                        <span class="service-icon">⚖️</span>
+                        Court Services
+                    </a>
+                    <a href="eservices/vehiclereg.html" class="service-item">
+                        <span class="service-icon">🚗</span>
+                        Vehicle Registry
+                    </a>
+                    <a href="eservices/census.html" class="service-item">
+                        <span class="service-icon">📊</span>
+                        Census Data
+                    </a>
+                    <a href="citizens/grievances.html" class="service-item">
+                        <span class="service-icon">📋</span>
+                        Grievance Portal
+                    </a>
+                </div>
+            </div>
+
+            <!-- News Section -->
+            <div class="news-section">
+                <h3>📰 Latest News &amp; Press Releases</h3>
+                <div class="news-item">
+                    <span class="news-date">March 17, 2009</span>
+                    <span class="badge-new">NEW</span>
+                    <h4><a href="ministries/technology.html">Parliament Approves National Cybersecurity Framework Bill 2009</a></h4>
+                    <p>The National Assembly passed the comprehensive cybersecurity bill with a 
+                    247-31 majority vote. The legislation establishes CERT-Computia and mandates 
+                    security standards for all government digital infrastructure...</p>
+                </div>
+                <div class="news-item">
+                    <span class="news-date">March 15, 2009</span>
+                    <h4><a href="ministries/foreignaffairs.html">Computia Signs Trade Agreement with Republic of Datastan</a></h4>
+                    <p>Foreign Minister Hon. Sarah Chen signed a bilateral trade agreement with 
+                    Datastan, expected to boost technology exports by 23% over the next fiscal year...</p>
+                </div>
+                <div class="news-item">
+                    <span class="news-date">March 14, 2009</span>
+                    <h4><a href="ministries/technology.html">Free Wi-Fi Zones Launched in 14 Major Cities</a></h4>
+                    <p>Ministry of Technology launches complimentary wireless internet access 
+                    points in public areas across all provincial capitals as part of the Digital 
+                    Inclusion Initiative...</p>
+                </div>
+                <div class="news-item">
+                    <span class="news-date">March 12, 2009</span>
+                    <span class="badge-updated">UPDATED</span>
+                    <h4><a href="ministries/transport.html">National Highway 7 Expansion Project Phase II Commences</a></h4>
+                    <p>The Ministry of Transport has commenced the second phase of NH-7 expansion 
+                    connecting Byteburg to Port Recursive, reducing travel time by an estimated 40%...</p>
+                </div>
+                <div class="news-item">
+                    <span class="news-date">March 10, 2009</span>
+                    <h4><a href="about/culture.html">Computia National Cricket Team Qualifies for World Cup 2011</a></h4>
+                    <p>The Computia Processors secured their spot in the 2011 Cricket World Cup 
+                    after a thrilling 4-wicket victory over the Datastan Debuggers in the qualifying 
+                    tournament finals...</p>
+                </div>
+                <div style="text-align:right; padding:6px 12px; font-size:10px;">
+                    <a href="sitemap.html">View All News &raquo;</a> | 
+                    <a href="sitemap.html">📡 RSS Feed</a> | 
+                    <a href="sitemap.html">News Archive</a>
+                </div>
+            </div>
+
+            <!-- Two Column Section -->
+            <div class="two-col">
+                <div class="col">
+                    <h3>🏛️ Key Government Officials</h3>
+                    <div class="minister-card">
+                        <div class="minister-photo">👤</div>
+                        <div class="minister-info">
+                            <strong><a href="government/president.html" style="color:#003366;">Dr. Alan K. Turing-Patel</a></strong>
+                            <em>President of the Republic</em><br>
+                            In office since: Jan 15, 2007
+                        </div>
+                    </div>
+                    <div class="minister-card">
+                        <div class="minister-photo">👤</div>
+                        <div class="minister-info">
+                            <strong><a href="government/primeminister.html" style="color:#003366;">Hon. Margaret Lovelace-Wu</a></strong>
+                            <em>Prime Minister</em><br>
+                            In office since: Feb 02, 2008
+                        </div>
+                    </div>
+                    <div class="minister-card">
+                        <div class="minister-photo">👤</div>
+                        <div class="minister-info">
+                            <strong><a href="ministries/technology.html" style="color:#003366;">Hon. Raj Kernel-Singh</a></strong>
+                            <em>Minister of Technology</em><br>
+                            In office since: Feb 02, 2008
+                        </div>
+                    </div>
+                    <div style="text-align:right; padding:5px 10px;">
+                        <a href="government/cabinet.html" style="font-size:10px;">View Full Cabinet &raquo;</a>
+                    </div>
+                </div>
+                <div class="col">
+                    <h3>📊 Computia At A Glance</h3>
+                    <div class="col-content">
+                        <table class="data-table">
+                            <tr><td><strong>Official Name</strong></td><td>Republic of Computia</td></tr>
+                            <tr><td><strong>Capital</strong></td><td><a href="about/geography.html">Byteburg</a></td></tr>
+                            <tr><td><strong>Population</strong></td><td>34.7 Million (2008 est.)</td></tr>
+                            <tr><td><strong>Area</strong></td><td>187,420 km²</td></tr>
+                            <tr><td><strong>Currency</strong></td><td><a href="about/symbols.html">Computian Credit (₢)</a></td></tr>
+                            <tr><td><strong>Languages</strong></td><td>English, Computian</td></tr>
+                            <tr><td><strong>GDP</strong></td><td>₢ 89.3 Billion (2008)</td></tr>
+                            <tr><td><strong>Provinces</strong></td><td>12</td></tr>
+                            <tr><td><strong>Independence</strong></td><td>August 10, 1947</td></tr>
+                            <tr><td><strong>Dialing Code</strong></td><td>+99</td></tr>
+                            <tr><td><strong>Internet TLD</strong></td><td><a href="about/symbols.html">.cp</a></td></tr>
+                        </table>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Public Notices -->
+            <div class="two-col">
+                <div class="col">
+                    <h3>📢 Public Notices &amp; Tenders</h3>
+                    <div class="scroll-box">
+                        <p>📌 <strong>Tender No. GOV/2009/0342</strong> — Supply of Computer Equipment for Provincial Schools — Deadline: April 5, 2009 <a href="sitemap.html">[Details]</a></p>
+                        <hr class="section-line">
+                        <p>📌 <strong>Tender No. GOV/2009/0339</strong> — Construction of Fiber Optic Network, Phase III — Deadline: March 28, 2009 <a href="sitemap.html">[Details]</a></p>
+                        <hr class="section-line">
+                        <p>📌 <strong>Notice:</strong> Public hearing on proposed amendments to the Information Technology Act, 2004 — March 25, 2009 at National Assembly Hall <a href="legislation.html">[Details]</a></p>
+                        <hr class="section-line">
+                        <p>📌 <strong>Tender No. GOV/2009/0335</strong> — Maintenance of Government Data Centers — Deadline: April 1, 2009 <a href="sitemap.html">[Details]</a></p>
+                        <hr class="section-line">
+                        <p>📌 <strong>Recruitment:</strong> Ministry of Technology — 156 Positions in Software Development Division <span class="badge-new">NEW</span> <a href="sitemap.html">[Apply Online]</a></p>
+                        <hr class="section-line">
+                        <p>📌 <strong>Notice:</strong> Annual maintenance shutdown of ComputiaNet backbone — March 22, 2009, 02:00-06:00 CST <a href="sitemap.html">[Details]</a></p>
+                    </div>
+                </div>
+                <div class="col">
+                    <h3>📅 Upcoming Events</h3>
+                    <div class="col-content">
+                        <p><strong>March 20:</strong> <a href="about/culture.html">National Technology Day</a> <span class="badge-updated">HOLIDAY</span></p>
+                        <p><strong>March 25:</strong> <a href="legislation.html">Public Hearing — IT Act Amendments</a></p>
+                        <p><strong>April 1:</strong> <a href="eservices/census.html">Census 2009 Registration Opens</a></p>
+                        <p><strong>April 10:</strong> <a href="about/culture.html">National Science Fair, Byteburg Convention Center</a></p>
+                        <p><strong>April 15:</strong> <a href="documents.html">Parliamentary Session — Budget Presentation 2009-10</a></p>
+                        <p><strong>May 1:</strong> <a href="about/culture.html">Labour Day</a> <span class="badge-updated">HOLIDAY</span></p>
+                        <p><strong>May 8:</strong> <a href="ministries/technology.html">International Digital Cooperation Summit, Byteburg</a></p>
+                        <p style="text-align:right; margin-top:8px;"><a href="sitemap.html">Full Calendar &raquo;</a></p>
+                    </div>
+                </div>
+            </div>
+
+        </main>
+
+        <!-- Right Sidebar -->
+        <aside class="sidebar-right">
+
+            <!-- Alert Box -->
+            <div class="sidebar-box alert-box">
+                <h3>⚠️ ALERT</h3>
+                <div class="box-content">
+                    <p class="blink-text">⚠ H1N1 Advisory</p>
+                    <p>The Ministry of Health has issued preventive guidelines for H1N1 influenza. <a href="citizens/services.html">Read Advisory &raquo;</a></p>
+                    <hr class="section-line">
+                    <p><strong>Emergency Numbers:</strong></p>
+                    <p>Police: <a href="tel:100"><strong>100</strong></a><br>
+                    Fire: <a href="tel:101"><strong>101</strong></a><br>
+                    Medical: <a href="tel:102"><strong>102</strong></a><br>
+                    Cyber Crime: <a href="tel:1930"><strong>1930</strong></a></p>
+                </div>
+            </div>
+
+            <!-- President's Message -->
+            <div class="sidebar-box">
+                <h3>🎖️ President's Message</h3>
+                <div class="box-content" style="text-align:center;">
+                    <svg viewBox="0 0 80 90" width="70" height="80" xmlns="http://www.w3.org/2000/svg">
+                        <rect width="80" height="90" fill="#ddd" stroke="#999" stroke-width="1"/>
+                        <circle cx="40" cy="32" r="15" fill="#bbb"/>
+                        <ellipse cx="40" cy="72" rx="25" ry="20" fill="#bbb"/>
+                        <text x="40" y="88" text-anchor="middle" font-size="6" fill="#888">Official Photo</text>
+                    </svg>
+                    <p style="font-size:10px; font-style:italic; margin-top:5px;">
+                        "Together, we build a Computia that leads the world in innovation."
+                    </p>
+                    <a href="government/president.html" style="font-size:10px;">Read Full Message &raquo;</a>
+                </div>
+            </div>
+
+            <!-- Poll -->
+            <div class="sidebar-box poll-box">
+                <h3>📊 Citizen Poll</h3>
+                <div class="box-content">
+                    <p><strong>How do you rate e-Gov services?</strong></p>
+                    <form>
+                        <label><input type="radio" name="poll" value="excellent"> Excellent</label>
+                        <label><input type="radio" name="poll" value="good"> Good</label>
+                        <label><input type="radio" name="poll" value="average"> Average</label>
+                        <label><input type="radio" name="poll" value="poor"> Needs Improvement</label>
+                        <br>
+                        <input type="submit" value="Vote" class="vote-btn">
+                        <a href="eservices.html" style="font-size:9px; margin-left:5px;">Results</a>
+                    </form>
+                    <p style="font-size:9px; color:#999; margin-top:4px;">Total Votes: 14,328</p>
+                </div>
+            </div>
+
+            <!-- Visitor Counter -->
+            <div class="visitor-counter">
+                <span>VISITORS</span>
+                0 2 8 4 7 3 1 9
+            </div>
+
+            <!-- Important Links -->
+            <div class="sidebar-box">
+                <h3>🔗 Important Links</h3>
+                <ul>
+                    <li><a href="index.html">National Portal</a></li>
+                    <li><a href="rti.html">Right to Information</a></li>
+                    <li><a href="citizens/grievances.html">Public Grievance</a></li>
+                    <li><a href="government/nic.html">National Informatics Centre</a></li>
+                    <li><a href="sitemap.html">Computia Post</a></li>
+                    <li><a href="sitemap.html">Railway Booking</a></li>
+                    <li><a href="sitemap.html">National Archives</a></li>
+                </ul>
+            </div>
+
+            <!-- Download Section -->
+            <div class="sidebar-box">
+                <h3>📥 Downloads</h3>
+                <div class="box-content">
+                    <p>📄 <a href="documents.html">Budget 2009-10 (PDF, 2.4MB)</a></p>
+                    <p>📄 <a href="documents.html">IT Policy 2009 (PDF, 890KB)</a></p>
+                    <p>📄 <a href="eservices/census.html">Census Form (PDF, 340KB)</a></p>
+                    <p>📄 <a href="documents.html">Annual Report 2008 (PDF, 5.1MB)</a></p>
+                    <hr class="section-line">
+                    <p style="font-size:9px;">💡 Documents require <a href="https://get.adobe.com/reader/" target="_blank">Adobe Reader</a></p>
+                </div>
+            </div>
+
+            <!-- Flag -->
+            <div class="sidebar-box">
+                <h3>🏴 National Flag</h3>
+                <div class="box-content" style="text-align:center; padding:10px;">
+                    <svg viewBox="0 0 150 100" width="130" height="87" xmlns="http://www.w3.org/2000/svg">
+                        <rect width="150" height="100" stroke="#333" stroke-width="1" fill="none"/>
+                        <rect x="0" y="0" width="150" height="33" fill="#003399"/>
+                        <rect x="0" y="33" width="150" height="34" fill="#ffffff"/>
+                        <rect x="0" y="67" width="150" height="33" fill="#009933"/>
+                        <circle cx="75" cy="50" r="14" fill="none" stroke="#c8a415" stroke-width="2"/>
+                        <circle cx="75" cy="50" r="4" fill="#c8a415"/>
+                        <line x1="75" y1="36" x2="75" y2="42" stroke="#c8a415" stroke-width="2"/>
+                        <line x1="75" y1="58" x2="75" y2="64" stroke="#c8a415" stroke-width="2"/>
+                        <line x1="61" y1="50" x2="67" y2="50" stroke="#c8a415" stroke-width="2"/>
+                        <line x1="83" y1="50" x2="89" y2="50" stroke="#c8a415" stroke-width="2"/>
+                        <circle cx="65" cy="40" r="1.5" fill="#c8a415"/>
+                        <circle cx="85" cy="40" r="1.5" fill="#c8a415"/>
+                        <circle cx="65" cy="60" r="1.5" fill="#c8a415"/>
+                        <circle cx="85" cy="60" r="1.5" fill="#c8a415"/>
+                    </svg>
+                    <p style="font-size:9px; color:#666; margin-top:4px;">Tricolour with Golden Circuit</p>
+                </div>
+            </div>
+
+        </aside>
+
+    </div>
+
+    <!-- Flag stripe before footer -->
+    <div class="flag-stripe"></div>
+
+    <!-- Footer -->
+    <div class="footer-top">
+        <div class="footer-columns">
+            <div class="footer-col">
+                <h4>Government</h4>
+                <ul>
+                    <li><a href="government/president.html">President's Secretariat</a></li>
+                    <li><a href="government/primeminister.html">Prime Minister's Office</a></li>
+                    <li><a href="government/cabinet.html">Council of Ministers</a></li>
+                    <li><a href="government/parliament.html">National Assembly</a></li>
+                    <li><a href="government/supremecourt.html">Supreme Court</a></li>
+                    <li><a href="government/states.html">State Governments</a></li>
+                </ul>
+            </div>
+            <div class="footer-col">
+                <h4>For Citizens</h4>
+                <ul>
+                    <li><a href="citizens/services.html">Services Directory</a></li>
+                    <li><a href="citizens/documents.html">Documents &amp; Forms</a></li>
+                    <li><a href="citizens/acts.html">Acts &amp; Rules</a></li>
+                    <li><a href="citizens/charter.html">Citizen Charter</a></li>
+                    <li><a href="citizens/grievances.html">Public Grievances</a></li>
+                    <li><a href="rti.html">RTI Online</a></li>
+                </ul>
+            </div>
+            <div class="footer-col">
+                <h4>About Computia</h4>
+                <ul>
+                    <li><a href="about/history.html">History</a></li>
+                    <li><a href="about/geography.html">Geography &amp; Climate</a></li>
+                    <li><a href="about/culture.html">Culture &amp; Heritage</a></li>
+                    <li><a href="about/economy.html">Economy</a></li>
+                    <li><a href="tourism.html">Tourism</a></li>
+                    <li><a href="about/symbols.html">National Symbols</a></li>
+                </ul>
+            </div>
+            <div class="footer-col">
+                <h4>Help &amp; Contact</h4>
+                <ul>
+                    <li><a href="/cdn-cgi/l/email-protection#c8a1a6aea788afa7bee6abb8">Contact Directory</a></li>
+                    <li><a href="faqs.html">FAQs</a></li>
+                    <li><a href="/cdn-cgi/l/email-protection#15737070717774767e55727a633b7665">Feedback</a></li>
+                    <li><a href="sitemap.html">Site Map</a></li>
+                    <li><a href="terms.html">Terms of Use</a></li>
+                    <li><a href="privacy.html">Privacy Policy</a></li>
+                </ul>
+            </div>
+        </div>
+    </div>
+
+    <div class="footer-bottom">
+        <p>
+            Content Owned, Maintained and Updated by the <strong>National Informatics Centre (NIC), Government of Computia</strong><br>
+            © 2009 Government of the Republic of Computia. All Rights Reserved.<br>
+            Designed, Developed and Hosted by <a href="government/nic.html">NIC</a> — Ministry of Technology, Byteburg, Computia
+        </p>
+        <div class="badges">
+            <span class="badge">XHTML 1.0</span>
+            <span class="badge">CSS 2.1</span>
+            <span class="badge">WAI-A</span>
+            <span class="badge">508 Compliant</span>
+        </div>
+        <p class="ie-notice">
+            🖥️ Best viewed in Internet 
